@@ -12,6 +12,13 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static(__dirname + '/public'));
 
+app.use(function(req,res,next) {
+	res.locals.showTests = app.get('env') !== 'production' &&
+		req.query.test === '1';
+	next();
+});
+
+
 app.get('/', function(req,res) {
 	// res.type('text/plain');
 	// res.send("Welcome to Vista Travels");
@@ -24,7 +31,11 @@ app.get('/about', function(req,res) {
 	// 	Math.floor(Math.random() * fortunes.length)];
 	// res.type('text/plain');
 	// res.send("Vista Travels is a travel website");
-	res.render('about', {fortune : fortune.getFortune()});
+	res.render('about', {
+		fortune : fortune.getFortune(),
+		pageTestScript: '/qa/tests-about.js'
+	});
+
 });
 
 app.use(function (req,res) {
