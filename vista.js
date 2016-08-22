@@ -38,6 +38,16 @@ app.get('/about', function(req,res) {
 
 });
 
+app.get('/tours/carribean-cruise', function(req, res){
+        res.render('tours/carribean-cruise');
+});
+app.get('/tours/oregon-coast', function(req, res){
+        res.render('tours/oregon-coast');
+});
+app.get('/tours/request-group-rate', function(req, res){
+        res.render('tours/request-group-rate');
+});
+
 app.use(function (req,res) {
 	// res.type('text/plain');
 	res.status(404);
